@@ -8,12 +8,14 @@ var total=0;
 var pagos =0;
 var intereses=0;
 var dias;
+var plazos;
+
 //funciones
 function funcionboton() {
     
     //Mandar a llamar los valores
     var importes = document.getElementById("importe").value;
-    var plazos = document.getElementById("plazo").value;
+    plazos = document.getElementById("plazo").value;
     var tazas = document.getElementById("taza").value;
     var fechas = document.getElementById("fecha").value;
     //var frcs = document.getElementById("frc").value;
@@ -22,7 +24,7 @@ function funcionboton() {
     //variables necesarias para el calculo
     fecha_final = fechas;
     // calculos
-    pagos = importes/12;
+    pagos = importes/plazos;
     comision = importes*0.01;
     intereses = importes*0.16/360*30;
     iva = comision+intereses*0.16;
@@ -81,7 +83,7 @@ function calculo(){
     var importenuevo =  importesglobal;
     importenuevo = importenuevo - flujo;
     let contador = 1;
-    while(contador<13){
+    do{
         let interesesnuevos = importenuevo*0.16/360*30;
         let amortizacionueva = pagos-interesesnuevos;
         let ivanuevo = comision+interesesnuevos*0.16;
@@ -121,5 +123,5 @@ function calculo(){
        // console.log('El iva es: ' + iva);
         //console.log('La comision es: '+comision);
         //contador=contador+1;
-    }
+    }while(contador<=plazos)
 }
